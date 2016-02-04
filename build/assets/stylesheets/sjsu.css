@@ -1,0 +1,11 @@
+html {
+  background-color: red;
+}
+html #content {
+  background-color: gold;
+}
+html #content .left {
+  text-align: left;
+}
+
+/*# sourceMappingURL=sjsu.css.map */

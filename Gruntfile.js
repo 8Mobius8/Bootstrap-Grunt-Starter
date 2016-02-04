@@ -3,14 +3,15 @@ module.exports = function(grunt) {
   // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-
+    
     watch: {
-      options:{
-
+      scripts: {
+        files: ['stylesheets/*.scss'],
+        tasks: ['sass:build', 'uglify:build'],
+        options: {
+          spawn: false,
+        },
       },
-      build: {
-        
-      }
     }, // watch
 
     uglify: {
@@ -18,21 +19,23 @@ module.exports = function(grunt) {
         banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
       },
       build: {
-        src: 'assets/<%= pkg.name %>.js',
-        dest: 'build/assets/<%= pkg.name %>.min.js'
+        src: 'assets/javascript/sjsu.js',
+        dest: 'build/assets/javascripts/sjsu.min.js'
       }
     }, // uglify
 
     sass: {                              // Task
+      
       build: {                           // Target
         options: {                       // Target options
           style: 'expanded'
         },
         files: {                         // Dictionary of files
-          // 'destination': 'source'
-          'build/assets/stylesheets/main.css': 'assets/stylesheets/sjsu.scss',
+          // 'destination': ['sources']
+          'build/assets/stylesheets/sjsu.css': ['assets/stylesheets/sjsu.scss'],
         }
       }
+
     } // sass
 
   });
@@ -44,6 +47,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
 
   // Default task(s).
-  grunt.registerTask('default', ['watch']);
+  grunt.registerTask('default', ['uglify:build']);
+  grunt.registerTask('watch', ['watch:scripts']);
+  grunt.registerTask('buildjs', ['uglify:build']);
+  grunt.registerTask('buildcss', ['sass:build']);
 
 };
