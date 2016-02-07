@@ -1,4 +1,6 @@
 # Don't need to track modules node installs. All info is in package.json
-
-node_modules/
+node_modules
+# Apparently Sass makes some caches
 .sass-cache
+# This is where our build will go, and does not require tracking
+build
