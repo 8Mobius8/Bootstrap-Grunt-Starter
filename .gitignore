@@ -1,2 +1,4 @@
 # Don't need to track modules node installs. All info is in package.json
+
 node_modules/
+.sass-cache
